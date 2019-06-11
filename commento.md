@@ -1,13 +1,21 @@
-# Elezioni 2018-2019: un'analisi Bayesiana per classi sociali
+# Classi sociali nelle elezioni 2018 e 2019: un'analisi bayesiana del voto
 
-## Caveat
+Questa analisi si basa su una stima di come hanno votato le diverse classi di reddito, nel Nord, nel Centro, e nel Sud. Non ci basiamo su nessun sondaggio: consideriamo soltanto _le schede nelle urne_ e le _dichiarazioni dei redditi_. La spiegazione dei dettagli matematici è in fondo dell'articolo, ma il succo è questo: proviamo a far corrispondere il voto di una certa classe di reddito con quante schede si sono effettivamente contate, e proviamo a usare le migliaia di comuni nel nord per ottenere delle ipotesi realistiche. Per esempio, se ipotizziamo che tra tutte le persone che guadagnano meno di 15 mila euro l'anno, il 40% abbia votato per un certo partito, possiamo usare i settemila comuni italiani per verificare questa ipotesi. Dal momento che per ciascun comune sappiamo sia quante persone appartengono a ogni fascia di reddito, sia quanti voti ha preso un certo partito, basta trovare delle percenutali per cui "quadrino i conti" per tutti i partiti (e per l'astensione).
 
+Come ogni analisi statistica ci sono dei _caveat_ a cui stare attenti. Il primo è che in questo modo non vi è _certezza_ sul rapporto causa-effetto tra presenza di una classe di reddito in un comune e voti presi. Più dettagli su questo a fine articolo. In ogni caso, quella che presentiamo qui è senz'altro l'ipotesi più realistica, che viene fuori dai dati nel modo più semplice e immediato.
 
-- Non consideriamo comuni sopra i 100 000 abitanti. Questo perchè l'analisi che propongo è basata su una divisione ISTAT comune per comune. I grossi comuni sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati), ma se inclusi nell'analisi sposterebbero i risultati introducendo un bias.
+Per questo motivo **non consideriamo comuni sopra i 100 000 abitanti**. Questo perchè l'analisi proposta si basa su una divisione ISTAT comune per comune. I grossi comuni sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati), ma se inclusi nell'analisi sposterebbero i risultati introducendo un _bias_.
 
-- Non consideriamo le regioni Val D'Aosta e Trentino Alto Adige: lo scenario politico in queste regioni è radicalmente diverso, poichè vi sono partiti locali di notevole importanza.
+Infine, non consideriamo le regioni Val D'Aosta e Trentino Alto Adige: lo scenario politico in queste regioni è radicalmente diverso, poichè vi sono partiti locali di notevole importanza.
 
 ## Distribuzione totale classi sociali
+
+Iniziamo mostrando cosa intendiamo in questo articolo per _classe di reddito_. Nonostante i dati ISTAT ci consentirebbero di replicare la stessa analisi su altre distinzioni di classe (per esempio salariati e non), sarebbe difficile distinguere il lavoro autonomo di una finta partita IVA da quello di chi ha decine di dipendenti. Per questo motivo ci siamo basati unicamente su una semplificazione delle fasce di reddito ISTAT. In particolare distinguiamo cinque classi di reddito:
+
+- Chi guadagna **sotto i 15 mila euro annui**. Qui troviamo pensionati con la "minima" (la media nazionale dei redditi da pensione è 14.665 euro), e molti lavoratori, sia autonomi che salariati. Ricordiamo che la soglia di povertà si aggira sui 9 mila euro annui, quindi questa fascia di reddito comprende anche loro. In ognuna delle tre aree considerate, è la classe più popolosa: 6 milioni di persone al Nord, 5 al centro e quasi 7 al Sud.
+
+- Chi sta tra i **15 e i 26 mila euro**. In questa fascia in generale ci aspettiamo di trovare il grosso dei lavoratori salariati: il lavoratore dipendente medio in Italia guadagna 17.370 euro. Sono la seconda fascia più popolosa: 5 milioni di persone al Nord, tra i 3 e 4 sia al Centro che al Sud.
+
 
 ![plot](plots/png/dist-redditi-Nord.png)
 ![plot](plots/png/dist-redditi-Centro.png)
@@ -49,7 +57,8 @@
 
 
 
-
+## Metodo
+: se in ogni comune in cui vi sono ricchi, un certo partito aumenta i suoi voti fra i più poveri, noi preferiremo la spiegazione più semplice: che i voti che osserviamo arrivino dai più ricchi – visto che quando vediamo ri
 
 
 
