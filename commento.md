@@ -1,21 +1,28 @@
 # Classi sociali nelle elezioni 2018 e 2019: un'analisi bayesiana del voto
 
-Questa analisi si basa su una stima di come hanno votato le diverse classi di reddito, nel Nord, nel Centro, e nel Sud. Non ci basiamo su nessun sondaggio: consideriamo soltanto _le schede nelle urne_ e le _dichiarazioni dei redditi_. La spiegazione dei dettagli matematici è in fondo dell'articolo, ma il succo è questo: proviamo a far corrispondere il voto di una certa classe di reddito con quante schede si sono effettivamente contate, e proviamo a usare le migliaia di comuni nel nord per ottenere delle ipotesi realistiche. Per esempio, se ipotizziamo che tra tutte le persone che guadagnano meno di 15 mila euro l'anno, il 40% abbia votato per un certo partito, possiamo usare i settemila comuni italiani per verificare questa ipotesi. Dal momento che per ciascun comune sappiamo sia quante persone appartengono a ogni fascia di reddito, sia quanti voti ha preso un certo partito, basta trovare delle percenutali per cui "quadrino i conti" per tutti i partiti (e per l'astensione).
+#### TODO: Introduzione pindarica
 
-Come ogni analisi statistica ci sono dei _caveat_ a cui stare attenti. Il primo è che in questo modo non vi è _certezza_ sul rapporto causa-effetto tra presenza di una classe di reddito in un comune e voti presi. Più dettagli su questo a fine articolo. In ogni caso, quella che presentiamo qui è senz'altro l'ipotesi più realistica, che viene fuori dai dati nel modo più semplice e immediato.
+Questa analisi si basa su una stima di come hanno votato le diverse classi di reddito, nel Nord, nel Centro, e nel Sud. Non ci basiamo su nessun sondaggio: consideriamo soltanto *le schede nelle urne* e le *dichiarazioni dei redditi*. La spiegazione dei dettagli matematici è in fondo dell'articolo, ma il succo è questo: proviamo a far corrispondere il voto di una certa classe di reddito con quante schede sono effettivamente state contate, e cerchiamo l'ipotesi che funziona meglio sui migliaia di comuni considerati. Dal momento che per ciascun comune sappiamo sia quante persone appartengono a ogni fascia di reddito, sia quanti voti ha preso un certo partito, troviamo le percenutali cha fanno "quadrare i conti" per tutti i partiti (e per l'astensione).
 
-Per questo motivo **non consideriamo comuni sopra i 100 000 abitanti**. Questo perchè l'analisi proposta si basa su una divisione ISTAT comune per comune. I grossi comuni sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati), ma se inclusi nell'analisi sposterebbero i risultati introducendo un _bias_.
+Come ogni analisi statistica ci sono delle puntualizzazioni da fare. La prima è che non abbiamo certezza sul rapporto causa-effetto: l'ipotesi proposta è quella più semplice, rasoio di Occam alla mano. Più dettagli su questo a fine articolo.
 
-Infine, non consideriamo le regioni Val D'Aosta e Trentino Alto Adige: lo scenario politico in queste regioni è radicalmente diverso, poichè vi sono partiti locali di notevole importanza.
+Per questo motivo, **non consideriamo comuni sopra i 100 000 abitanti**, cercando di eliminare ogni possibile fattore di confusione. L'analisi proposta si basa infatti su una divisione ISTAT comune per comune: ma i grossi comuni sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati), quindi semplicemente non vengono considerati. Tutte le conclusioni che ne trarremo valgono perciò solo per i comuni sotto i 100 000 abitanti.
 
-## Distribuzione totale classi sociali
+Infine, non consideriamo le regioni Val D'Aosta e Trentino Alto Adige: la presenza di partiti locali autonomi rende lo scenario politico in queste regioni radicalmente diverso. Divideremo l'Italia in tre aree: Nord (senza Val D'Aosta e Trentino), Centro e Sud.
 
-Iniziamo mostrando cosa intendiamo in questo articolo per _classe di reddito_. Nonostante i dati ISTAT ci consentirebbero di replicare la stessa analisi su altre distinzioni di classe (per esempio salariati e non), sarebbe difficile distinguere il lavoro autonomo di una finta partita IVA da quello di chi ha decine di dipendenti. Per questo motivo ci siamo basati unicamente su una semplificazione delle fasce di reddito ISTAT. In particolare distinguiamo cinque classi di reddito:
+## Le classi considerate
+
+Iniziamo mostrando cosa intendiamo in questo articolo per *classe di reddito*. Nonostante i dati ISTAT ci consentirebbero di replicare la stessa analisi su altre distinzioni di classe (per esempio salariati e non), sarebbe difficile distinguere il lavoro autonomo di una finta partita IVA da quello di chi ha decine di dipendenti. Per questo motivo ci siamo basati unicamente su una versione semplificata delle fasce di reddito ISTAT. Distinguiamo cinque classi di reddito:
 
 - Chi guadagna **sotto i 15 mila euro annui**. Qui troviamo pensionati con la "minima" (la media nazionale dei redditi da pensione è 14.665 euro), e molti lavoratori, sia autonomi che salariati. Ricordiamo che la soglia di povertà si aggira sui 9 mila euro annui, quindi questa fascia di reddito comprende anche loro. In ognuna delle tre aree considerate, è la classe più popolosa: 6 milioni di persone al Nord, 5 al centro e quasi 7 al Sud.
 
-- Chi sta tra i **15 e i 26 mila euro**. In questa fascia in generale ci aspettiamo di trovare il grosso dei lavoratori salariati: il lavoratore dipendente medio in Italia guadagna 17.370 euro. Sono la seconda fascia più popolosa: 5 milioni di persone al Nord, tra i 3 e 4 sia al Centro che al Sud.
+- Chi sta tra i **15 e i 26 mila euro**. In questa fascia in generale ci aspettiamo di trovare il grosso dei lavoratori salariati: il lavoratore dipendente medio in Italia guadagna 17.370 euro. Da [2]: *"Il  reddito  medio  da  lavoro  dipendente  raggiunge  il  picco  di  circa  20.490  euro  in  corrispondenza  della  classe prossima  al  pensionamento e scende  rapidamente  a  16.360  euro  tra  gli  ultrasessantacinquenni"*.  Sono la seconda fascia più popolosa: 5 milioni di persone al Nord, tra i 3 e 4 sia al Centro che al Sud.
 
+- Chi sta tra i **26 e i 55 mila euro**. *Middle class* e *upper-middle class*: rientrano in questa fascia tipicamente imprenditori – il reddito medio di un lavoratore autonomo è di circa 36 mila euro l'anno – e categorie professionali altamente specializzate. Per esempio, il reddito medio di un ingegnere è di 37 mila euro l'anno; gli studi medici 66 mila euro [3]. Questa classe è la più piccola tra le tre viste finora, e include circa 4 milioni di persone al Nord, meno di 3 al centro e 2 al Sud.
+
+- Infine distinguiamo due fasce "agiate": i redditi **tra i 55 e i 75 mila euro** e i redditi **oltre i 75 mila euro**. Ognuna conta meno di mezzo milione di persone in ogni area considerata.
+
+- Infine, abbiamo stimato il numero di **elettori non contribuenti**, semplicemente confrontando numero di elettori e numero di dichiarazioni dei redditi. In questa classe ci aspettiamo quindi di trovare giovani, studenti, inattivi, disoccupati di lungo corso, e lavoratori costretti al lavoro nero. Sono circa 1 milione sia al Nord che al Centro; al Sud raggiungono invece l'impressionante numero di 4 milioni e mezzo di persone.
 
 ![plot](plots/png/dist-redditi-Nord.png)
 ![plot](plots/png/dist-redditi-Centro.png)
@@ -54,19 +61,13 @@ Iniziamo mostrando cosa intendiamo in questo articolo per _classe di reddito_. N
 
 
 
+## Bibliografia
 
+- [1] ISTAT. Rapporto annuale 2017: la situazione del paese.
 
+- [2] ISTAT. *Condizioni di vita, reddito e carico fiscale delle famiglie*. 6 dicembre 2018
 
-## Metodo
-: se in ogni comune in cui vi sono ricchi, un certo partito aumenta i suoi voti fra i più poveri, noi preferiremo la spiegazione più semplice: che i voti che osserviamo arrivino dai più ricchi – visto che quando vediamo ri
-
-
-
-
-
-
-
-
+- [3] Rapporto 2018 sulle libere professioni, curato dall'Osservatorio sulle libere professioni.
 
 
 
