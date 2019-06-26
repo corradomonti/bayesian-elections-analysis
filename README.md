@@ -1,18 +1,24 @@
 # Classi sociali nelle elezioni 2018 e 2019: un'analisi bayesiana del voto
 
-#### TODO: Introduzione pindarica
+**Come hanno votato le classi sociali?** Sappiamo che una *classe in sè* che esiste nella società non sempre diventa una *classe per sè*, coscente dei suoi interessi e capace di organizzarli in forma di partito. Se la divisione tra chi ha molto e chi ha poco era alla base delle divisioni dei partiti politici dalla loro nascita, le *classi per sè* si sono affievolite molto negli ultimi decenni. La nascita di partiti "pigliatutto", pronti a sostenere qualunque politica e il suo opposto, ha appiattito molte differenze; tanto più da quando negli anni '90 qualcuno ha teorizzato la fine della Storia, intendendo la fine dello scontro sociale (s'è visto). E oggi, tra sinistra di destra e populismi vari, è sempre più difficile dire chi rappresenta chi.
 
-Questa analisi si basa su una stima di come hanno votato le diverse classi di reddito, nel Nord, nel Centro, e nel Sud. Non ci basiamo su nessun sondaggio: consideriamo soltanto *le schede nelle urne* e le *dichiarazioni dei redditi* [1]. La spiegazione dei dettagli matematici è in fondo dell'articolo, ma il succo è questo: proviamo a far corrispondere il voto di una certa classe di reddito con quante schede sono effettivamente state contate, e cerchiamo l'ipotesi che funziona meglio sui migliaia di comuni considerati. Dal momento che per ciascun comune sappiamo sia quante persone appartengono a ogni fascia di reddito, sia quanti voti ha preso un certo partito, troviamo le percenutali cha fanno "quadrare i conti" per tutti i partiti (e per l'astensione).
+Siamo tutti d'accordo: c'è stato un continuo sgretolamento delle "identità di classe", e una corrispondente agonia dei "partiti di classe". Questo a vantaggio di partiti pigliatutto, determinati da immagini mediatiche dei leader, e di partiti di notabili, ormai guidati direttamente dai Berlusconi o dai Trump che perseguono propri interessi. Ma noi sappiamo che sono gli interessi di classe a muovere la Storia. 
 
-Come ogni analisi statistica ci sono delle puntualizzazioni da fare. La prima è che non abbiamo certezza sul rapporto causa-effetto: l'ipotesi proposta è quella più semplice, rasoio di Occam alla mano. Più dettagli su questo a fine articolo.
+Quindi, proviamo a indagare coi dati la questione di chi rappresenta chi – e di chi *non* è rappresentato affatto. Useremo la statistica bayesiana per fare luce sulla questione: col teorema di Bayes, si parte da un'ipotesi a priori e la si modifica guardando la realtà dei dati. Così faremo. La nostra ipotesi di base è che **possiamo individuare nei voti una logica che dipende dal portafogli**. Quello che ci faremo dire dai dati è come si muovono questi voti tra i vari partiti italiani, confrontando le **elezioni politiche del 2018** e quelle **europee del 2019**.
 
-Per questo motivo, **non consideriamo comuni sopra i 100 000 abitanti**, cercando di eliminare ogni possibile fattore di confusione. L'analisi proposta si basa infatti su una divisione ISTAT comune per comune: ma i grossi comuni sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati), quindi non li considereremo. Tutte le conclusioni che proponiamo valgono perciò solo per i comuni sotto i 100 000 abitanti.
+## L'analisi
+
+Questa analisi, insomma, si basa su una stima di come hanno votato le diverse classi di reddito, nel Nord, nel Centro, e nel Sud. **Non ci basiamo su nessun sondaggio**: consideriamo soltanto *le schede nelle urne* e le *dichiarazioni dei redditi* [1]. La spiegazione dei dettagli matematici è in fondo dell'articolo, ma il succo è questo: proviamo a far corrispondere il voto di una certa classe di reddito con quante schede sono effettivamente state contate, e cerchiamo l'ipotesi che funziona meglio sui migliaia di comuni considerati. Dal momento che per ciascun comune sappiamo sia quante persone appartengono a ogni fascia di reddito, sia quanti voti ha preso un certo partito, troviamo le percentuali cha fanno "quadrare i conti" per tutti i partiti (e per l'astensione).
+
+Come ogni analisi statistica ci sono delle puntualizzazioni da fare. La prima è che non abbiamo certezza sul rapporto causa-effetto: l'ipotesi proposta è quella più semplice, rasoio di Occam alla mano: se nei comuni dove ci sono molti ricchi, un partito prende tanti voti, è perchè sta prendendo più voti in quella classe.
+
+Per questo motivo, **non consideriamo comuni sopra i 100 000 abitanti**, cercando di eliminare ogni possibile fattore di confusione. L'analisi proposta si basa infatti su una divisione ISTAT comune per comune: ma i grossi comuni hanno una distribuzione di voto e di classe particolare, ma sono troppo pochi per fare un'analisi separata (sono 45 sui 7800 considerati). Tutte le conclusioni che proponiamo valgono perciò solo per i comuni sotto i 100 000 abitanti.
 
 Infine, non consideriamo le regioni Val D'Aosta e Trentino Alto Adige: la presenza di partiti locali autonomi rende lo scenario politico in queste regioni radicalmente diverso. Divideremo quindi l'Italia in tre aree: Nord (senza Val D'Aosta e Trentino), Centro e Sud.
 
 ## Le classi considerate
 
-Iniziamo mostrando cosa intendiamo per *classe di reddito*. Nonostante i dati ISTAT ci consentirebbero di analizzare altre distinzioni di classe, come esempio salariati e non, sarebbe difficile distinguere il lavoro autonomo, ma di fatto salariato, di una finta partita IVA da quello di chi paga i salari a decine di persone. Per questo motivo ci siamo basati unicamente su una versione semplificata delle fascie di reddito ISTAT. Distinguiamo quindi cinque classi di reddito:
+Iniziamo mostrando cosa intendiamo per *classe di reddito*. Nonostante i dati ISTAT ci consentirebbero di analizzare altre distinzioni di classe, come esempio salariati e non, sarebbe difficile distinguere il lavoro autonomo, ma di fatto salariato, di una finta partita IVA da quello di chi paga decine di persone. Per questo motivo ci siamo basati unicamente su una versione semplificata delle fascie di reddito ISTAT. Distinguiamo quindi cinque classi di reddito:
 
 - Chi guadagna **sotto i 15 mila euro annui**, fascia di reddito bassa. Qui troviamo per esempio pensionati con la "minima" – la media nazionale dei redditi da pensione è 14.665 euro – così come molti lavoratori, principalmente salariati. Ricordiamo che la soglia di povertà in Italia si aggira sui 9 mila euro annui: questa fascia di reddito comprende anche loro. In ognuna delle tre aree considerate, è la classe più popolosa: 6 milioni di persone al Nord, 5 al centro e quasi 7 al Sud.
 
@@ -30,8 +36,6 @@ Iniziamo mostrando cosa intendiamo per *classe di reddito*. Nonostante i dati IS
 
 
 ## Risultati
-
-#### Commenti
 
 Prima di tutto, questa analisi conferma molti fatti noti. Il **Movimento 5 Stelle** alle **politiche del 2018** è stato il partito scelto dalle **classi lavoratrici di reddito medio-basso**, specialmente al Sud. Stimiamo che al Sud, nella fascia 15-26 mila euro annui, il M5S abbia sfiorato il 60% *sugli aventi diritto*; al Nord, nella stessa fascia, avrebbe raccolto tra il 30% e il 40% degli aventi diritto – circa come la Lega. Inoltre, il Movimento nel 2018 aveva attirato i voti dei non contribuenti – quindi **giovani e/o disoccupati di lungo corso** – in tutta Italia.
 
@@ -62,8 +66,25 @@ Tuttavia, è interessante notare come sia cambiato tra 2018 e 2019 il voto al PD
 ![plot](plots/png/risultati-Sud-2018-politiche.png)
 ![plot](plots/png/risultati-Sud-2019-europee.png)
 
+## Appendice metodologica
 
+L'analisi presentata si basa su questo assunto a priori: prendiamo in considerazione un certo insieme di partiti. Nel nostro caso, abbiamo considerato i maggiori 8 partiti in ogni elezione. A questi, aggiungiamo un ultimo, fondamentale, partito: il *partito dell'astensione*, come lo chiamano i media: semplicemente, il numero di elettori meno quello dei voti. In questo modo sappiamo che la somma delle loro percentuali di voto deve dare il 100%.
 
+Facciamo lo stesso con le classi di reddito: identifichiamo le nostre cinque classi di reddito e aggiungiamo la classe dei non contribuenti, in modo che la loro somma dia il numero di elettori.
+
+Ora, consideriamo un solo comune, dove il partito $i$ ha preso voti $V_i$ e la classe $j$ ha $X_j$ membri. Ipotizziamo che per ogni partito valga:
+
+$V_i \sim \mathcal{N}( \sum_{j} p_{j, i} \cdot X_j, \sigma)$
+
+ovvero, il numero di voti presi dal partito $i$ si distribuisce come una gaussiana, con varianza (rumore) $\sigma$ e media $\sum_{j} p_{j, i} \cdot X_j$. (L'alternativa di modellare i $V_i$ come distribuzione multinomiale è stata scartata per semplicità di calcolo.) Questi $p_{j, i}$ sono quello che cerchiamo: la frazione dei membri della classe $i$ che ha votato il partito $j$. Ora, sappiamo che – dal momento che consideriamo anche il partito dell'astensione – deve valere 
+
+$\sum_i p_{j, i} = 1$
+
+per ogni classe $j$. Per questo motivo, la distribuzione *a priori* dei nostri $p$ per una certa classe $j$ sarà una Dirichlet:
+
+$p_j \sim \operatorname{Dir}(\boldsymbol\alpha)$
+
+dove i valori in $\alpha$ sono tutti identici. Il valore di $\alpha$ regola quanto i partiti si differenziano gli uni dagli altri all'interno della stessa classe. A questo punto ci basta assumere una distribuzione a priori per $\sigma$ che privilegi livelli di rumore bassi (una Cauchy tagliata a 0) e abbiamo fatto. Affidiamo a *Markov chain Monte Carlo*, implementato in `pymc3`, il compito di arrivare a convergenza, trovando i valori di $p_j$ che "fittano" i dati per tutti i comuni considerati.
 
 ## Bibliografia
 
